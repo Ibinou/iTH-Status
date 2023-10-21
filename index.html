@@ -2,11 +2,15 @@
 <html>
 <head>
     <title>iTH Status</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#fff">
 </head>
 <body>
-    <h1>iTH status </h1>
-    
- <div id="status"></div>
+  
+    <h1 id="home" style="font-family:helvetica;font-size:28px;color: white;margin-top: -6px;margin-bottom: 12px;">Status</h1>
+	<div id="status"></div>
+    <div id="cocostatus"></div>
 <script>
 function isSiteOnline(url, callback) {
     var timer = setTimeout(function() {
@@ -30,6 +34,38 @@ function isSiteOnline(url, callback) {
 
 isSiteOnline("https://itweakhub.netlify.app/", function(found) {
     var statusDiv = document.getElementById("status");
+    if (found) {
+        statusDiv.innerText = "working";
+        statusDiv.style.color = "green";
+    } else {
+        statusDiv.innerText = "Not working";
+        statusDiv.style.color = "red";
+    }
+});
+</script>
+<script>
+function isSiteOnline(url, callback) {
+    var timer = setTimeout(function() {
+        // Timeout after 5 seconds
+        callback(false);
+    }, 5000);
+
+    var img = document.createElement("img");
+    img.onload = function() {
+        clearTimeout(timer);
+        callback(true);
+    };
+
+    img.onerror = function() {
+        clearTimeout(timer);
+        callback(false);
+    };
+
+    img.src = url + "logo.webp";
+}
+
+isSiteOnline("https://cdn.cococloud-cdn.site/fronted-logos/MainLogo/", function(found) {
+    var statusDiv = document.getElementById("cocostatus");
     if (found) {
         statusDiv.innerText = "working";
         statusDiv.style.color = "green";
