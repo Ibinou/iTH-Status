@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iTH Status</title>
+</head>
+<body>
+    <h1>iTH status </h1>
+    
+ <div id="status"></div>
+<script>
+function isSiteOnline(url, callback) {
+    var timer = setTimeout(function() {
+        // Timeout after 5 seconds
+        callback(false);
+    }, 5000);
+
+    var img = document.createElement("img");
+    img.onload = function() {
+        clearTimeout(timer);
+        callback(true);
+    };
+
+    img.onerror = function() {
+        clearTimeout(timer);
+        callback(false);
+    };
+
+    img.src = url + "img/favicon.ico";
+}
+
+isSiteOnline("https://itweakhub.netlify.app/", function(found) {
+    var statusDiv = document.getElementById("status");
+    if (found) {
+        statusDiv.innerText = "working";
+        statusDiv.style.color = "green";
+    } else {
+        statusDiv.innerText = "Not working";
+        statusDiv.style.color = "red";
+    }
+});
+</script>
+</body>
+</html>
