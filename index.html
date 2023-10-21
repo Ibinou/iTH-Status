@@ -12,7 +12,14 @@
     <h1 id="home" style="font-family:helvetica;font-size:28px;color: black;margin-top: 20px;margin-bottom: 12px;">Status</h1>
 	<span>iTweakHub Status<div id="status"></div></span>
     <span>Cococloud API<div id="cocostatus"></div></span>
+	<center>
+		<button onclick="refreshPage()">Refresh Page</button>
+	</center>
 <script>
+        function refreshPage() {
+            location.reload(); // This function reloads the current page
+        }
+	
 function isSiteOnline(url, callback) {
     var timer = setTimeout(function() {
         // Timeout after 5 seconds
